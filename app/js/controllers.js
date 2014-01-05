@@ -2,10 +2,13 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
-  controller('MyCtrl1', [function() {
-
-  }])
-  .controller('MyCtrl2', [function() {
-
-  }]);
+angular.module('test.controllers', []).
+    controller('TestCtrl', function ($scope, $occi) {
+        $scope.getCategories = $occi.getCategories()
+            .success(function (categories) {
+                $scope.categories = categories;
+            })
+            .error(function (error) {
+                $scope.status = 'Unable to load data: ' + error.message;
+            });
+    });
